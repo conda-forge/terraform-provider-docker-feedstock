@@ -1,14 +1,11 @@
 {% set provider = "Docker" %}
 {% set goname = "github.com/terraform-providers/terraform-provider-"+provider.lower() %}
-{% set version = "0.1.1" %}
+{% set version = "1.0.0" %}
 
 {% set name = goname.split('/')[-1] %}
 {% set pkg_src = ('src/'+goname).replace("/",os.sep) %}
 
 {% set x4_plugin = name + '_v' + version + "_x4" + (".exe" if win else "")%}
-
-{% set sha256 = "8a72f457c572d4b00826ef7c883d942024e80868671782bfcb38ebbc94d198b8" %}
-{% set sha256_win64 = "ca8a5c0a32dde26d5624d147e6eca1c9e5b15439b95c2778f78ba034ef747a83" %}
 
 package:
   name: {{ name|lower }}
@@ -17,8 +14,7 @@ package:
 source:
   - folder:  {{ pkg_src }}
     url: https://{{ goname }}/archive/v{{ version }}.tar.gz
-    sha256: {{ sha256 }}
-
+    sha256: d4527303e2dcf5f28ff8b8c86750cb3308ac277cac92e1d772d5194452915802
 
 build:
   number: 1002
