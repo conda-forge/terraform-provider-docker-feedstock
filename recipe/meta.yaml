@@ -4,7 +4,7 @@
 
 {% set name = goname.split('/')[-1] %}
 
-{% set plugin_dir = os.sep.join(["plugins", "registry.terraform.io", "kreuzwerker", provider.lower(), version]) %}
+{% set plugin_dir = os.sep.join(["plugins", "registry.terraform.io", "hashicorp", provider.lower(), version]) %}
 {% set x4_plugin = name + '_v' + version %}
 
 package:
@@ -26,12 +26,12 @@ requirements:
 
 test:
   requires:
-    - terraform >=1
+    - terraform 1
 
   commands:
     # Create a sample init.tf loading the provider
-    - echo 'terraform { \n required_providers { \n docker = { \n source = "kreuzwerker/{{ provider|lower }}" \n version="{{ version }}" } } }' > init.tf  # [unix]
-    -recho provider "{{ provider|lower }}" { version="{{ version }}" } > init.tf    # [win]
+    - echo 'provider "{{ provider|lower }}" { version="{{ version }}" }' > init.tf  # [unix]
+    - echo provider "{{ provider|lower }}" { version="{{ version }}" } > init.tf    # [win]
 
     # Initialize
     - terraform init --plugin-dir={{ target_gobin }}..{{ os.sep }}plugins
