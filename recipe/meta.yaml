@@ -1,6 +1,6 @@
 {% set provider = "Docker" %}
-{% set goname = "github.com/terraform-providers/terraform-provider-"+provider.lower() %}
-{% set version = "2.7.2" %}
+{% set goname = "github.com/kreuzwerker/terraform-provider-"+provider.lower() %}
+{% set version = "2.21.0" %}
 
 {% set name = goname.split('/')[-1] %}
 
@@ -13,7 +13,7 @@ package:
 
 source:
   url: https://{{ goname }}/archive/v{{ version }}.tar.gz
-  sha256: 2dd8735001292d6890945131dbbc078292f0249ec447ec52c74134493dd34a95
+  sha256: 5c3dcdc25a340acef9006bf67c0792cb8b7da67a4a3a06a1572b91adece9559c
 
 build:
   number: 1
@@ -22,11 +22,11 @@ build:
 
 requirements:
   build:
-    - {{ compiler('go') }} 1.13
+    - {{ compiler('go') }} 1.18
 
 test:
   requires:
-    - terraform >=1
+    - terraform 1
 
   commands:
     # Create a sample init.tf loading the provider
